@@ -87,7 +87,8 @@ func backendMode(port int) {
 
 func frontendMode(port int, backendURL string) {
 	log.Println("Operating in frontend mode...")
-	tpl := template.Must(template.New("out").Parse(html))
+	content, err := ioutil.ReadFile("client.html")
+	tpl := template.Must(template.New("out").Parse(content))
 
 	transport := http.Transport{DisableKeepAlives: false}
 	client := &http.Client{Transport: &transport}
